@@ -13,9 +13,11 @@ const helmet = require('helmet');
 const SHA256 = require('crypto-js/sha256');
 const Utf8 = require('crypto-js/enc-utf8');
 const Base64  = require('crypto-js/enc-base64');
+var cors = require('cors')
 
 const app = Express();
 app.use(helmet())
+app.use(cors())
 
 const knex = require('knex')({
     client: 'mysql',

@@ -305,6 +305,13 @@ app.post('/upload', upload.single('file'), function (req, res, next) {
     });
 });
 
+app.get('/introduction', (req, res) => {
+    return knex('introduction').select('content')
+    .then(contentList => {
+        return res.status(200).json(contentList);
+    });
+});
+
 app.get('/introduction:id', (req, res) => {
     return knex('introduction').select('content').where({id: req.params.id}).limit(1)
     .then(staffList => {

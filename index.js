@@ -308,19 +308,18 @@ app.post('/upload', upload.single('file'), function (req, res, next) {
 app.get('/introduction', (req, res) => {
     return knex('introduction').select('content')
     .then(introductionList => {
-        return res.status(200).json(contentList);
+        return res.status(200).json(introductionList);
     });
 });
 
-app.get('/introduction:id', (req, res) => {
+app.get('/introduction/:id', (req, res) => {
     return knex('introduction').select('content').where({id: req.params.id}).limit(1)
     .then(introductionList => {
         if(introductionList.length === 0) 
-        return res.status(404).json({message: 'introduction not found.'});
-        return res.status(200).json(introductionList);
+            return res.status(404).json({message: 'introduction not found.'});
+        return res.status(200).json(introductionList[0]);
     });
 });
 
 
 app.listen(3001, () => { console.log('Server started.') });
-
